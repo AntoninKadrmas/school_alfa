@@ -1,0 +1,21 @@
+{
+    "server":{
+        "address":"localhost",
+        "port":65530,
+        "connection_timeout":1,
+        "response_timeout":2,
+        "client_timeout":4,
+        "name":"server name",
+        "error":"server error"
+    },
+    "scan":{
+        "address":[
+            ["localhost"],
+            ["192.168.0.1","192.168.0.5"]
+        ],
+        "port":[
+            [8080,8085],
+            [65535]
+        ]
+    }
+}

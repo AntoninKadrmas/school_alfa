@@ -1,0 +1,1 @@
+{"config": {"fromFile": "./data/forEncode/example.txt", "toFile": "./data/forDecode/example.txt", "overwrite": true}}

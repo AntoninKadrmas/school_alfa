@@ -1,0 +1,10 @@
+{
+    "db_config":{
+       "address":"127.0.0.1",
+       "database":"alfakadrmas"
+    },
+    "import":{
+        "path":"C:\\Users\\AntoninKadrmas\\Documents\\skola\\pv\\2022_23\\skola\\du\\alfa3_new\\data\\import\\products.csv",
+        "delimiter":";"
+    }
+}
