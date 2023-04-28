@@ -1,0 +1,5 @@
+Naprogramujte dle architektonického vzoru klient/server program, který umožní komunikaci dvou a více uživatelů pomocí protokolu TCP. Komunikace by měla spočívat ve vzájemném zasílání zpráv ve formátu string vždy pro všechny uživatele, přičemž jeden klient může zaslat i více zpráv za sebou nebo jen naslouchat.
+Vyřešte situace kdy se některý z klientů na určitou dobu odpojí a následně připojí, aby mu dorazili zprávy, které byly zaslány v době nepřítomnosti.
+Vyřešte situaci kdy klientovi vypadne síťové spojení a na 1min, během které zašle zprávu tak, aby když se opět připojí zpráva se odelslala.
+Aplikujte na zasílání zpráv Vermanovo šifrování vlastním algoritmem.
+Naposledy změněno: Pondělí, 28. listopadu 2022, 10.25

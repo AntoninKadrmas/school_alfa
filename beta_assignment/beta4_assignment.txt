@@ -1,0 +1,22 @@
+Poslední úloha pro pokročilé má čtyři samostatné částí a musíte použít verzovací systém, ve které vytvoříte čtyři verze Vašeho programu. Program je velmi jednoduchý, Vaším úkolem je naprogramovat řešení jednoho z NP úplných problémů ze seznamu níže:
+
+Batoh 
+Obchodní cestující
+Problém dvou loupežníků
+Verze 1.0
+Vytvořte algoritmus, který problém vyřešeí metodou prohledávání stavového prostoru hrubou silou bez jakékolik paralerizace, vláken apod.. Bez triků, bez zrychlení - ano opravdu. Algoritmusi musí vygenerovat všechny (i nesmyslné) stavy a všechny zkontrolovat.
+
+Verze 2.0
+Upravte verzi 1.0 tak, že navrhněteí maximální možnou fyzickou paralerizaci na úrovni procesů nebo vláken jednoho výpočetního zařízení (PC). Tím se pokuste algoritmus zrychlit. Musí být zachována čistota (tupost) algoritmu hrubou silou, tak že se stále budou procházet i nesmyslné stavy. Všechny stavy.
+
+Verze 3.0
+Změťe algoritmus z verze 2.0 tak, aby namísto hrubé síly používal jinou metodu ze seznamu níže:
+Aproximační
+Genetickou
+Pravděpodobnostní 
+Heuristickou
+Verze 4.0
+Změťe algoritmus z verze 3.0 tak, aby výpočet mohl probíhat na na X samostatných výpočetních zařízeních (PC) a spusťe výpočet na min. 3 školních PC paralerně. Výsledné řešení musí komunikovat pouze na portech  65525 až 65535. Pro řešení zvolte dostatečně rozsáhlé zadání Vašeho NP úplnýho problému, který každý použitý školní PC zatíží alespoň na 2min. Doporučujeme použít aproximační/nedeterministický algoritmus, ale není to nutné.
+
+
+Naposledy změněno: Pondělí, 13. února 2023, 14.38

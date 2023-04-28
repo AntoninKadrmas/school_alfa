@@ -1,0 +1,16 @@
+Vytvořte smysluplné databázové schéma, které má minimálně 8 tabulek a minimálně 10 cizích klíčů (vazeb), obsahuje jednu vazbu typu "Arc relation". Schéma řádně dokumentujte.
+
+K této databázi vytvořte aplikaci, která 
+
+pomocí maximálně pěti uživatelských formulářů (view, web. stránek, okének) dokáží zobrazovat a manipulovat s daty ve všech databázových tabulkách.
+bude využívat jednu implementaci vzor Unit of Work a libovolný počet implementací návrhového vzoru Repository. 
+bude vždy pracovat v transakčním režimu
+bude v konfiguračním souboru nejen nastavení databáze, ale bude umožňovat nastavit i izolační úroveň transakcí (více na: https://en.wikipedia.org/wiki/Isolation_(database_systems)#Isolation_levels)
+bude obsahovat unit testy, které budou testovat, zda-li v různých úrovních izolace dle nastavení mohou nebo nemohou nastat jevy:
+Dirty reads, Dirty writes
+Non-repetable reads
+Phantom reads
+ (více na: https://medium.com/geekculture/transaction-isolation-levels-f438f861e48a)
+Aplikace musí být spustitelná na školním PC.
+
+Naposledy změněno: Pátek, 20. ledna 2023, 16.24

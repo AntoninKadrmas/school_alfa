@@ -1,0 +1,5 @@
+Přeprogramujte úlohu Beta.1 bez použití TCP, tedy pouze s UPD, ale povinně naprogramujte vlastní plovoucího okénko, jako má například TCP.
+
+Zdroje:
+
+https://cs.wikipedia.org/wiki/Protokol_s_posuvn%C3%BDm_ok%C3%A9nkem nebo lepe https://en.wikipedia.org/wiki/Sliding_window_protocol
