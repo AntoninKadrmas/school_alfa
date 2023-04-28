@@ -1,0 +1,89 @@
+Naprogramujte aplikaci, která bude umět překládat pět slov z anglického do českého jazyka a bude součástí "peer to peer" sítě. 
+
+Program musí obsahovat Vámi vytvořený slovníček přesně pěti anglických slov a jejich českého překladu. Bude překládat pouze AJ do ČJ, obráceně to umět nemá, není to potřeba. Komunikovat se bude pomocí protokolu TCP/IP tak, že program bude přijímat přesně vymezené textové příkazy a bude na ně odpovídat přesnými textovými odpověďmi. Musí se dodržet i pořadí a nesmí se žádné přikazy přidávat nebo odebírat. Tyto příkazy jsou uvedeny níže, nesmíte je nijak upravovat. Pokud se spustí více programů najednou, dohoromady pak nabídnou překladový systém podle architektury peer to peer (P2P), kde každý program překládá sice pouze svých pět slovíček, ale dohromady celá síť těchto programů umí přeložit pětkrát tolik slovíček, kolik je spuštěných programů.
+
+Program musí kromě výše uvedených přijímaných i zasílaných zpráv, tedy komunikačního protokolu,  splňovat následující kritéria:
+
+Progam musí povinně pracovat na protokolem IPv4. (Volitelně lze s oběma IPv4 i s IPv6, ale IPv4 povinně) a  musí povinně používat protokol TCP/IP.
+Program musí přijímat a zasílat pouze přesně definované zprávy dalším programům v textovém formátu a kódování UTF-8. Nesmí zasílat zprávy, kterou nejsou níže povolené.
+Program musí být spustitelný jako démon v OS Linux. (Pozor program tedy nesmí používat žádný příkaz pro výpis typu print(), Console.WriteLine() nebo System.out.print() a namísto toho musí používat logování do souboru.)
+Celé řešení musí obsahovat instalační skript pro OS Linux, distribuce Debian a nebo soubor README, kde bude popsána manuální instalace a spuštění ve formě démona.
+Program musí být konfigurovatelný konfiguračním souborem, kde lze nastavit na jakém portu a IP naslouchá a jaký IP rozsah a porty má scanovat pro případnou komunikaci. Musí zde být možnost nastavit program, aby naslouchal i na všech IP adresách zároveň. Nezapomínejte při scanování scanovat nejen rozsah IP ale i rozsah portů od-do.
+Program musí mít právě pět originálních slovíček, ne víc, ne méně. 
+Program musí pracovat podle architektonického návrhového vzoru peer to peer zkráceně P2P. (Skupina spuštěných programů pak bude tvořit jeden překladový systém. Když dojde k odpojení jednoho programu ze systému, celý systém přijde právě o pět slovíček a naopak připojením nového programu systém získá právě pět nových slovíček, nebudou-li se slovíčka opakovat).
+Program musí při každé komunikaci s dalším peerem dodržovat například 5 sekundový timeout, tedy když protistrana do 5 sekund neodpoví, program komunikaci ukončí. Doporučujeme, aby timeout byl konfigurovatelný a můžete zavést více timeoutů pro různé situace.
+Program musí být schopen reagovat okamžitě na spuštění nebo vypnutí dalších programů v řádu sekund, tedy doporučujeme scanovat aktuální stav síťe při každém příkazu pro překlad.
+Program musí komunikovat pouze a jedině pomocí níže uvedených příkazů v přesně stanoveném pořadí. Nemůžete si tvořit vlastní příkazy nebo do komunikace cokoli dalšího přidávat nebo měnit.
+Pro otestování programu bude použit PuTTy, telnet nebo jiný hotový program. Nepište vlastního klienta.
+Program musí být spustitelný na školním PC v učebně 18ab nebo 19ab. Nelze akceptovat odevzdání na vlastním zařízení.
+K vypracování použijte jeden z programovacích jazyků Java, Python, CSharp, C/C++, případně jiný jazyk, který schválí Váš vyučující PV a PSS.
+
+Povolené příkazy alias "Komunikační protokol"
+Příkazy mají vždy 14 znakový název a může následovat string s překladem nebo chybovou hláškou uzavřený ve dvojitých uvozovkách. Jsou definovány tři možné zprávy a tři možné odpovědi. Program se ale musí vyrovnat i s chybovým chováním, tedy že po sítí může přijít cokoliv... protože síť je jako uživatel, nikdy nevíte co do programu pošle, takže je definováno i to, když po sítí přijde cokoliv jiného, než bylo uvedeno.
+
+TRANSLATEPING"jmeno programu"
+
+Příkaz zjišťuje, zdali na dané IP a portu je další obdobný program a může s ním komunikovat. Odpovědí je pak příkaz TRANSLATEPONG, pokud je na druhé straně stejný program, nebo cokoli jiného, když tam ten tento program není. Například
+
+-> TRANSLATEPING"NoVAK Translator 1.0"
+
+<- TRANSLATEPONG"Milánkův slovníkový program"
+
+TRANSLATELOCL"slovo k prekladu" 
+
+Příkaz provede překlad pomocí lokálního slovníku svých pěti slov. Odpovědí může být TRANSLATEDSUC"prelozene slovo" nebo TRANSLATEDERR"chybova hlaska". Příklady komunikace jsou například:
+
+-> TRANSLATELOCL"dům"
+
+<- TRANSLATEDSUC"house"
+
+nebo pokud slovo není nalezeno, program to oznámí takto:
+
+-> TRANSLATELOCL"sing"
+
+<- TRANSLATEDERR"...chybova hlaska..."
+
+TRANSLATESCAN"slovo k prekladu" 
+
+Pracuje podobně jako příkaz pro lokální překlad výše, ale kromě lokálního slovníku svých pěti slov skenuje síť  v rozsahu dle konfiguračního souboru) a pokud v ní nalezne další programy, požádá je pomocí příkazu TRANSLATELOCL o překlad. Pokud mu někdo odpoví, ukončí dotazování a odpoví pomocí TRANSLATEDSUC, nebo pokud mu nikdo překlad neposkytne, vrátí chybovou hlášku pomocí TRANSLATEDERR.
+
+-> TRANSLATESCAN"house"
+
+10.0.0.1....-> TRANSLATELOCL"house"
+
+10.0.0.1....<- TRANSLATEDERR"nenalezano house"
+
+10.0.0.2....-> TRANSLATELOCL"house"
+
+10.0.0.2....<- TRANSLATEDERR"nevim, neznam, neotravuj"
+
+10.0.0.3....-> TRANSLATELOCL"house"
+
+10.0.0.3....<- TRANSLATEDSUC"dům"
+
+<- TRANSLATEDSUC"dům"
+
+Povolené odpovědi
+TRANSLATEPONG"jmeno programu"
+
+Odpověď na příkaz TRANSLATEPING. Vyměňují se zde názvy jednotlivých programů (peerů) jen pro snažší debugování celého systému.
+
+TRANSLATEDSUC"preklad slova"
+
+Translate success je odpovědí na zprávu zaslanou prostřednictvím TRANSLATELOCL, TRANSLATESCAN o povedenem prekladu slova, která obsahuje český překlad slova.
+
+TRANSLATEDERR"chybová hláška"
+
+Translate error je je odpovědí na zprávu zaslanou prostřednictvím TRANSLATELOCL, TRANSLATESCAN, že se překlad nepovedl. Může volitelně obsahovat i chybovou hlášku, ale může být zaslána i ve tvaru TRANSLATEDERR"". Vždy musí obsahovat uvozovky.
+
+(cokoli jiného)
+Program se musí výpořádat i s tím, že na druhé straně je chyba, běží tam jiný program, například SMTP server, NTP server, nebo že program prostě nestihne odpovědět. Tedy pokud přijde něco jíného než výše uvedené povolené příkazy, nebo dokonce nic nepřijde celé 3sec, musí se s tím program vypořádat.
+
+
+FAQ a časté chyby
+Nesnažte se programovat klienta, použijte PuTTy nebo telnet. 
+Nepleťe si to s architekturou klient/server.
+Neměňte příkazy, používejte výhradně ty povolené a přesně v tom tvaru, v jaké mají být. Když si zavedete vlastní příkazy, tak Váš program nepůjde projit s programy spolužáků.
+Nezapomeňte na timeouty. Je to klíčová část programu. Je třeba hlídat timeout jak při scanování sítě tak při každé komunikaci. Kdykoli se může každý připojený program nebo PuTTy prostě náhle odpojit nebo dlouho nereagovat.
+Netestujte program sami, vždy testujte propojení Vašeho programu s programy spolužáků. Nakonec bude třeba postavit síť těchto propojení, takže je celkem jedno, zda-li Vám program pracuje na localhostu... důležité je, aby spolupracoval s programy dalších lidí.
+Naposledy změněno: Neděle, 5. února 2023, 16.38

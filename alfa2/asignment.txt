@@ -1,0 +1,12 @@
+Vytvořte prorgam na kompresi a dekompresi textových souboru, který na vstupu přijme libovolný textový soubor a provede jeho kompresi do binárního souboru, který bude mít pro soubory s více než 1000 znaků prokazatelně menší velikost. Komprese musí být bez-ztrát. Program musí tedy zvládnout i opačný proces dekomprese. Pro program platí následující pravidla:
+
+Program musí být konfigurovatelný například kam má uložit výsledek a jak ho má pojmenovat.
+Program musí informaci o každém svém spuštění logovat do souboru ve formátu XML, kde bude informace o tom v jaké konfiguraci se program nacházel a co kdy zpracoval a zda-li a jak dobře se povedlo komprimovat nebo dekomprimovat, nebo zda-li nastala chyba.
+Program musí umět vypsat informace o svých operacích z logu a musí je umožnit filtrovat podle zadaného času dalších parametrů, které zvolíte
+Program musí umět poskytnout uživateli nápovědu o tom jak se používá
+Progam nesmí používat žádnou externí knihovnu pro komprese nebo dekomprese. 
+Program se musí umět vypořádat s chybami typu, že soubor nelze číst kvůli oprávnění, že soubor není textový apod. O každé chybě musí být záznam v logu a také se musí uživateli zobrazit vhodná chybová hláška.
+Program musí být rozdělen do více souborů a složek pro jednotlivé části. Logy by měly být ve složce /log, konfigurace ve složce /config, data a soubory ve složce /data, zdrojový kód pak musí být rozdělen do dalších package/modulů ve složce /src (uživatelské rozhraní zvlášť, algoritmy pro kompresi zvlášť, práce s logem zvlášť). Dokumentace ve složce /doc a unit testy ve složce /test. Pokud použijete cizí zdrojový kód musí byt také ve zvláštní složce, například /lib nebo /vendor.
+Program může kromě komprimovaného souboru generovat i pomocné soubory s kódovací tabulkou, ale je lepší, když je kódovací tabulka použitá pro kompresi spíše součástí binárního souboru.
+Pro kompresi doporučujeme využít například Huffmanovo kódování, https://en.wikipedia.org/wiki/Huffman_coding ale můžete využít i jakýkoli jiný algoritmus, který jste schopni vytvořit, například prosté zakódování použitých znaků. Doporučujeme také využít OOP a návrhových vzorů. Příponu Vámi komprimovaného binárního souboru doporučjeme .dat, ale může to být i Vaše vlastní.  
+

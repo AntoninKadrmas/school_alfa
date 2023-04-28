@@ -1,0 +1,85 @@
+Vaším úkolem je napsat implemetaci dvou tříd podle níže uvedeného interface:
+
+class Hadanka:
+    def __init__(self, veta: str):
+        raise NotImplemented
+
+    def pocet_slov(self):
+        raise NotImplemented
+
+    def hadej_slovo(self, slovo : str):
+        raise NotImplemented
+
+    def hadej_vetu(self, veta : str):
+        raise NotImplemented
+
+class Hra:
+    def hraj(self, hadanka : Hadanka):
+        raise NotImplemented
+Tyto třídy reprezentují hru na hádání věty. Na začátku se určí věta ve třídě, která dědí od Hadanka a následně tuto větu metoda ve třídě Hra hádá. Například takto:
+
+if __name__ == "__main__":
+
+    hadanka = MandikovaHadanka("petr ma svetr")
+    hra = MandikovaHra()
+
+    veta = hra.hraj(hadanka)
+    if(hadanka.hadej_vetu(veta)):
+        print("Vyhral jsem")
+    else:
+        print("Prohral jsem")
+Pro ukázku  jsem naprogramoval jednu velmi hloupou implementaci, která umí uhádnout pouze větu, která se skládá ze slov jana, petr, ma, nema, klobouk, svetr a třídu pro hádanku, která umí pracovat jen s písmeny malé anglické abecedy a mezerami. Třeba takto:
+
+class MandikovaHadanka(Hadanka):
+    def __init__(self, veta : str):
+        if not re.match("^[a-z ]+$",veta):
+            raise Exception("veta smi obsahovat jen mala pismena anglicke abecedy a mezery")
+        self._veta = veta
+        self._slova = veta.split(' ')
+
+    def pocet_slov(self):
+        return len(self._slova)
+
+    def hadej_slovo(self, slovo : str):
+        vyskyt = []
+        for i in range(len(self._slova)):
+            if self._slova[i] == slovo:
+                vyskyt.append(i)
+        return vyskyt
+
+    def hadej_vetu(self, veta : str):
+        return self._veta == veta
+
+class MandikovaHra(Hra):
+    def hraj(self, hadanka : MandikovaHadanka):
+        uhadnuto = []
+        for i in range(0, hadanka.pocet_slov()):
+            uhadnuto.append('nevim')
+
+        slova = ["jana","petr","svetr","klobouk","ma","nema"]
+        for slovo in slova:
+            vysledek = hadanka.hadej_slovo(slovo)
+            if(len(vysledek)>0):
+                for pozice in vysledek:
+                    uhadnuto[pozice] = slovo
+
+        return " ".join(uhadnuto)
+Vy mále ale navíc. Vaším prvním domácím úkolem je naprogramovat vlastní a lepší implementaci hádanky a hry, která bude mít níže uvedené vlastnosti následující vlastnosti. Pokud chcete můžete použít i jiný programovací jazyk, ale musíte si analogicky vytovořit výše uvedené interaface.
+
+Algoritmus navhněte sami tak, aby byl chytřejší než jen výše uvedený.
+Hádání bude probíhat paralerně, takže při hádání uvidíme zatížené více než jedno procesorové jádro.
+V programu použijete alespoň jedno synchonizační primitivum.
+Jednotlivé paralelní části programu si v případě toho, že některá uhádne byť jediné slovo informaci předají, nebo nasdílí.
+V případě, že bude uhádnutá celá věta se všechny paralelní části programu zastaví, tedy některé paralelní části pak nedoběhnou až do konce.
+V programu bude možné algoritmus konfigurovat a to konrétně:
+    a) timeout, po kterém to vzdá;
+    b) maximální délku jednoho slova, které lze v hádnce použít.
+Program bude mít rozumné uživatelské rozhraní, pomocí kterého půjde 
+    a) zadat hádaná věta včetně ošetření chyby při zadání neplatných znaků, nebo moc dlouhých slov; Omezení si stanovte sami, například jen malá a velká písmena anglické abecedy a jen mezery, čárky a tečky...
+    b) neustále zobrazovat jaký je stav tak, že člověk nikdy nebude mít pocit, že se to zaseklo.
+Program bude obsahovat základní unit testy pro primitivní případy i pro špatná zadání.
+Doporučujeme využít například znalosti z kapitol o  zpracování stringu, generátorech a korutinách pro generování slov, OOP/dedičnost a vyjímky pro architekturu celého díla a doporučujeme ho začátku dobře rozdělit do modulů a package a hlídat si, kde je jsou metody main() pro start programu a kde pro unit testy. Silně doporučujeme používat vhodné datové struktury, které usnadní napsání celého algoritmu, ale je to na Vás... 
+
+Upozrňujeme, že tato úloha není týmová ale samostatná a lze ji napsat mnoha způsoby. Je velmi nepravděpodobné, že dva žáci budou mít stejný program a proto se vyvarujte inspiracím ze zdrojových kódů spolužáků a týmové spolupráci a předejděte případným plagiátům. Pokud použijete cizí kód, například ten, který naše automatická kontrola dokáže vygooglit nebo ho najde na githubu, uveďte vždy zdroj.
+
+Naposledy změněno: Čtvrtek, 8. prosince 2022, 09.51

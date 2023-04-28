@@ -1,0 +1,18 @@
+Vytvořte uživatelské rozhraní pro Vámi navrženou databází z oblasti průmyslu, nebo obchodu, která má alespoň 5 tabulek. V rámci databáze musí být min. jedna vazbu M:N a min. dva databázové pohledy (view). Mezi atributy musíte použít následující datové typy: Reálné číslo (float), Logická hodnota (bool), Výčet (enum), Řetězec (string), Datum a čas (datetime). 
+
+Uživatelské rozhraní nebo API musí umožňovat:
+
+Vložení, smazání a úpravu nějaké informace, záznamu, který se ukládá do více než jedné tabulky. Například vložení objednávky, která má položky apod.
+Provést transakci nad více než jednou tabulkou. Například převod kreditních bodů mezi dvěma účty apod.
+Vygenerovat souhrný report, který bude obsahovat smysluplná agregovaná data z alespoň tří tabulek Vaší databáze, např. počet součty nákupů podle měst apod. Report musí mít hlavičku a patičku.
+Import dat do min. dvou tabulek z formátu CSV, XML nebo JSON.
+Nastavit celý program v konfiguračním souboru.
+K programu zpracujte a odevzdejte
+Min. tři testovací scénáře ve formátu PDF (.pdf) podle kterých můžeme otestovat všechny výše uvedné body, včetně všech druhů chyb a možností konfigurace.
+Řádnou dokumentaci, která bude obsahovat vše z Příloha 1 - Checklist v českém nebo anglickém jazyce.
+V případě všech možných chyb musí program rozumným způsobem reagovat, nebo vyžadovat součinnost uživatele k vyřešení problému. To je třeba podchytit v testovacích scénářích.
+Program musí využívat návrhové vzory a "best practice" tam, kde je to vhodné.
+Program nemusí obsahovat unit testy, na místo toho musí obsahovat testovací scénáře pro testery. Tester je člověk, který bude aplikaci testovat. Kontrolovat a hodnotit se pak bude jen dle scénářů a dle dokumentace. Pokud budou dokumentace i testovací scénář správně zpracovány bude nahlíženo i do zdrojového kódu. Práce, které nebudou obsahovat scénáře a dokumentaci, nebo tyto dvě částí nebudou zpracovány v dostatečné kvalitě budou hodnoceny známkou nedostatečně bez kontroly zdrojového kódu.
+K vypracování použijte libovolný programovací jazyk, nebo skupinu jazyků, který se ve škole vyučuje, nebo který Vám schválí Váš učitel. Dbejte na to, abyste svůj zdrojový kód nesdíleli s žádným spolužákem. 
+
+Naposledy změněno: Pátek, 20. ledna 2023, 15.59
