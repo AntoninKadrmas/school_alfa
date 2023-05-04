@@ -1,7 +1,7 @@
 * linguist-vendored
 *.rtf linguist-vendored=true
-*.py linguist-vendored=false
-*.sql linguist-vendored=false
-*.json linguist-vendored=false
-*.txt linguist-vendored=false
+*.py linguist-language=Python
+*.sql linguist-language=SQL
+*.json linguist-language=JSON
+*.txt linguist-language=Text
 
