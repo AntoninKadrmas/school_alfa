@@ -1,5 +1,4 @@
 * linguist-vendored
 *.rtf linguist-vendored=true
-*.json linguist-language=JSON
-*.txt linguist-language=Text
+*.py linguist-vendored=false
 
